@@ -11,7 +11,7 @@ const commentAPI=require('./Middleware/CommentAPI');
 const express = require('express');
 const authMiddleware = require('./Security/AuthencationMiddleware');
 const passport = require('./Security/Passport');
-const expressSession = require('cookie-session');
+const expressSession = require('express-session');
 const cors=require('cors');
 
 
@@ -87,3 +87,5 @@ setUpRabbit.then(
         console.log(error);
         throw error;
     });
+
+console.log("ok");
