@@ -54,7 +54,7 @@ app.use('/imageAsset', express.static(Constants.IMAGE_ASSET_DIR));
 app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR))
 
 //Init server
-const server = app.listen(3000);
+const server = app.listen(process.env.PORT || 3000);
 
 //Init HLS Support
 // new hls(server, { path: '/video', dir: Constants.VIDEO_ASSET_DIR });
