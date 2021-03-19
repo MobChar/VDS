@@ -59,6 +59,7 @@ const server = app.listen(3000);
 //Init HLS Support
 // new hls(server, { path: '/video', dir: Constants.VIDEO_ASSET_DIR });
 
+console.log("ok");
 
 //Init AMQP
 var rabbitChannel;
