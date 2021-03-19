@@ -18,7 +18,6 @@ const cors=require('cors');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser());
 app.use('/comment',expressSession({secret: 'keyboard cat', resave: false, cookie: {secure: false, httpOnly: false }}));
 app.use('/comment',passport.initialize());
 app.use('/comment',passport.session());
