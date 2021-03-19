@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Your title</title>
+
+
+
+</head>
+
+<body>
+  <div id='videoWrapper'></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!-- Or if you want a more recent alpha version -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@alpha"></script> -->
+
+  <script>
+    $.get("/live-stream-list", function (data) {
+      $('#videoWrapper').append('<video id="video" controls></video>');
+      data=JSON.parse(data);
+      console.log(data);
+      var video = document.getElementById('video');
+      var videoSrc = '/videoAsset/1614557752237/360p/prog.m3u8';
+      if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+      }
+      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+      }
+    });
+  </script>
+
+
+</body>
+
+</html>
