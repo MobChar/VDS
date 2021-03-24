@@ -56,6 +56,11 @@ app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR))
 //Init server
 const server = app.listen(process.env.PORT || 3000);
 
+const dirTree = require("directory-tree");
+    
+const tree = dirTree('');
+console.log(tree);
+
 //Init HLS Support
 // new hls(server, { path: '/video', dir: Constants.VIDEO_ASSET_DIR });
 

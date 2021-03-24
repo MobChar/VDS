@@ -44,6 +44,7 @@ router.post('/', cpUpload, function (req, res) {
     }
 
 
+    
 
     services.playback.uploadVideo(req.channel._id,req.body.title,req.files.image[0],req.files.video[0],(err,newDoc)=>{
         if(err) return res.status(500).end(err.message);
