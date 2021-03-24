@@ -23,14 +23,14 @@ app.use('/comment',passport.initialize());
 app.use('/comment',passport.session());
 app.use(authMiddleware);
 
-var liveStreamURLList = [];
+// var liveStreamURLList = [];
 
 app.get('/', (req, res) => {
     return res.status(200).sendFile(`${__dirname}/${Constants.VIEW_ASSET_DIR}/index.html`);
 });
-app.get('/live-stream-list', (req, res) => {
-    return res.status(200).end(JSON.stringify({ liveStreamURLList }));
-})
+// app.get('/live-stream-list', (req, res) => {
+//     return res.status(200).end(JSON.stringify({ liveStreamURLList }));
+// })
 
 
 //Oauth2
@@ -59,33 +59,33 @@ const server = app.listen(process.env.PORT || 3000);
 //Init HLS Support
 // new hls(server, { path: '/video', dir: Constants.VIDEO_ASSET_DIR });
 
-console.log("ok");
+// console.log("ok");
 
-//Init AMQP
-var rabbitChannel;
-const setUpRabbit = require('./AmqpService/RabbitMQConfig');
-const { connect } = require('http2');
-setUpRabbit.then(
-    result => {
-        rabbitChannel = result;
+// //Init AMQP
+// var rabbitChannel;
+// const setUpRabbit = require('./AmqpService/RabbitMQConfig');
+// const { connect } = require('http2');
+// setUpRabbit.then(
+//     result => {
+//         rabbitChannel = result;
 
-        rabbitChannel.consume('open_live_stream', function (payload) {
-            let data = JSON.parse(payload.content);
-            liveStreamURLList.push(data.liveStreamURL);
-            console.log(liveStreamURLList);
-        }, {
-            noAck: true
-        });
+//         rabbitChannel.consume('open_live_stream', function (payload) {
+//             let data = JSON.parse(payload.content);
+//             liveStreamURLList.push(data.liveStreamURL);
+//             console.log(liveStreamURLList);
+//         }, {
+//             noAck: true
+//         });
 
-        rabbitChannel.consume('close_live_stream', function (payload) {
-            let data = JSON.parse(payload.content);
-        }, {
-            noAck: true
-        });
-    }
-    , error => {
-        console.log(error);
-        throw error;
-    });
+//         rabbitChannel.consume('close_live_stream', function (payload) {
+//             let data = JSON.parse(payload.content);
+//         }, {
+//             noAck: true
+//         });
+//     }
+//     , error => {
+//         console.log(error);
+//         throw error;
+//     });
 
-console.log("ok");
+// console.log("ok");

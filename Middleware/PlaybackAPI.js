@@ -37,8 +37,8 @@ var cpUpload = upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', m
 router.post('/', cpUpload, function (req, res) {
     const errors = [];
     if (typeof req.body.title!=='string'||!validator.isLength(req.body.title, { min: 5, max: 100 })) errors.push({ path: "title", message: "string from 5-100" });
-    if (req.files.image === undefined) errors.push({ path: "image", message: "file must not empty" });
-    if (req.files.video === undefined) errors.push({ path: "video", message: "file must not empty" });
+    if (req.files===undefined||req.files.image === undefined) errors.push({ path: "image", message: "file must not empty" });
+    if (req.files===undefined||req.files.video === undefined) errors.push({ path: "video", message: "file must not empty" });
     if (errors.length > 0) {
         return res.status(400).json({ errors: errors });
     }
