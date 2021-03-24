@@ -20,7 +20,7 @@
   
       $('#videoWrapper').append('<video id="video" controls></video>');
       var video = document.getElementById('video');
-      var videoSrc = '/videoAsset//1616552209445/720p/prog.m3u8';
+      var videoSrc = 'https://video-vds.herokuapp.com/videoAsset/1616560721436/720p/prog.m3u8';
       if (Hls.isSupported()) {
         var hls = new Hls();
         hls.loadSource(videoSrc);
