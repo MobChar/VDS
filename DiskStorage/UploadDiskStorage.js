@@ -4,6 +4,14 @@ const Constants=require('../Constants');
 //Set Storage
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
+        if (!fs.existsSync(Constants.IMAGE_ASSET_DIR)){
+            fs.mkdirSync(Constants.IMAGE_ASSET_DIR);
+        }
+
+        if (!fs.existsSync(Constants.VIDEO_ASSET_DIR)){
+            fs.mkdirSync(Constants.VIDEO_ASSET_DIR);
+        }
+
         let ext = path.extname(file.originalname);
         if (ext === '.jpg' || ext == '.png')
             cb(null, Constants.IMAGE_ASSET_DIR);
