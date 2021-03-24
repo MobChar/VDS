@@ -48,11 +48,6 @@ router.post('/', cpUpload, function (req, res) {
         if(err) return res.status(500).end(err.message);
         res.status(200).json(newDoc);
     })
-    // videoConverter.standardEncodeAndSaveToM3U8(`${Constants.VIDEO_ASSET_DIR}/${req.files.video[0].filename}`, req.files.video[0].filename.split('.')[0],
-    //     null, null, null, function (encodeErr, videoPath) {
-    //         db.playback.insert({ title: req.body.title, videoPath: `/videoAsset/${videoPath}`, imagePath: req.files.image !== undefined ? `/imageAsset/${req.files.image[0].filename}` : Constants.DEFAULT_IMAGE_PATH, channelId: req.channel._id });
-    //     });
-    // res.sendStatus(200);
 })
 
 module.exports = router;
