@@ -15,6 +15,11 @@ function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, 
         fs.mkdirSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p`,{ recursive: true });
     }
 
+    const dirTree = require("directory-tree");
+
+    const tree = dirTree('');
+    console.log(tree);
+
 
     infs.addInput(filePath)
         .withSize('1280x720').autopad('black')
