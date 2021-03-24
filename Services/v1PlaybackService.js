@@ -14,6 +14,7 @@ service.suggestVideo = function (callback) {
     });
 }
 service.uploadVideo = function (channelId, title, image, video, callback) {
+    console.log("AC");
     videoConverter.standardEncodeAndSaveToM3U8(`${Constants.VIDEO_ASSET_DIR}/${video.filename}`, video.filename.split('.')[0],
         null, null, null, function (encodeErr, videoPath) {
 
