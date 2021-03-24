@@ -17,12 +17,10 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@alpha"></script> -->
 
   <script>
-    $.get("/live-stream-list", function (data) {
+  
       $('#videoWrapper').append('<video id="video" controls></video>');
-      data=JSON.parse(data);
-      console.log(data);
       var video = document.getElementById('video');
-      var videoSrc = '/videoAsset/1614557752237/360p/prog.m3u8';
+      var videoSrc = '/videoAsset//1616552209445/720p/prog.m3u8';
       if (Hls.isSupported()) {
         var hls = new Hls();
         hls.loadSource(videoSrc);
@@ -31,7 +29,7 @@
       else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = videoSrc;
       }
-    });
+    
   </script>
 
 

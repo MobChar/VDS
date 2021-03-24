@@ -8,17 +8,18 @@ ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, funcOnError, funcOnProgress, funcOnEnd) {
     var infs = new ffmpeg;
 
-    if (!fs.existsSync(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`)){
-        fs.mkdirSync(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`,{ recursive: true });
+    if (!fs.existsSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`)){
+        fs.mkdirSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`,{ recursive: true });
     }
-    if (!fs.existsSync(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p`)){
-        fs.mkdirSync(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p`,{ recursive: true });
+    if (!fs.existsSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p`)){
+        fs.mkdirSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p`,{ recursive: true });
     }
 
 
     infs.addInput(filePath)
         .withSize('1280x720').autopad('black')
-        .output(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p/prog.m3u8`)
+        .output(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p/prog.m3u8`)
+        .outputOptions('-hls_list_size 0')
         .on('start', function (commandLine) {
             if (funcOnStart !== null) {
                 funcOnStart(commandLine);
@@ -45,7 +46,8 @@ function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, 
             console.log('Finished processing!' /*, err, stdout, stderr*/);
         })
         .withSize('640x360').autopad('black')
-        .output(`./${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p/prog.m3u8`)
+        .output(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/360p/prog.m3u8`)
+        .outputOptions('-hls_list_size 0')
         .run();
 }
 

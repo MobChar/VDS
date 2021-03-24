@@ -19,7 +19,7 @@ service.uploadVideo = function (channelId, title, image, video, callback) {
 
             if(encodeErr) return callback(err,null);
             
-            db.playback.insert({ title: title, videoPath: `/videoAsset/${videoPath}`, imagePath: `/imageAsset/${image.filename}` },function(err,newDoc){
+            db.playback.insert({ title: title, videoPath: `/videoAsset${videoPath}`, imagePath: `/imageAsset/${image.filename}` },function(err,newDoc){
                 callback(err,newDoc);
             });
             
