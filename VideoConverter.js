@@ -35,6 +35,7 @@ function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, 
         })
         .on('progress', function (progress) {
             if (funcOnProgress !== null) {
+              
                 funcOnProgress(progress);
             }
             console.log('Processing: ' + progress.percent + '% done');

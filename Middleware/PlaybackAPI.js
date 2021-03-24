@@ -46,11 +46,11 @@ router.post('/', cpUpload, function (req, res) {
 
     services.playback.uploadVideo(req.channel._id,req.body.title,req.files.image[0],req.files.video[0],
         (progress)=>{
-            res.write(progress.percent+'');
+            res.write(progress.timemark+'\n');
         },
         (err,newDoc)=>{
-        if(err) return res.status(500).end(err.message);
-        res.json(newDoc);
+            if(err) return res.status(500).end(err.message);
+            return res.end();
     })
 })
 
