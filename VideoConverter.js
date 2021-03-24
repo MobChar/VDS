@@ -8,6 +8,8 @@ ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, funcOnError, funcOnProgress, funcOnEnd) {
     var infs = new ffmpeg;
 
+    console.log('hello');
+
     if (!fs.existsSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`)){
         fs.mkdirSync(`${projConst.VIDEO_ASSET_DIR}/${encodedFileDirName}/720p`,{ recursive: true });
     }
@@ -16,7 +18,7 @@ function standardEncodeAndSaveToM3U8(filePath, encodedFileDirName, funcOnStart, 
     }
 
     const dirTree = require("directory-tree");
-
+    
     const tree = dirTree('');
     console.log(tree);
 
