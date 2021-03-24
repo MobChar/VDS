@@ -13,14 +13,14 @@ service.suggestVideo = function (callback) {
         callback(err, docs);
     });
 }
-service.uploadVideo = function (channelId, title, image, video, callback) {
+service.uploadVideo = function (channelId, title, image, video, progressCallBack,endCallBack) {
     videoConverter.standardEncodeAndSaveToM3U8(`${Constants.VIDEO_ASSET_DIR}/${video.filename}`, video.filename.split('.')[0],
-        null, null, null, function (encodeErr, videoPath) {
+        null, null, progressCallBack, function (encodeErr, videoPath) {
 
-            if(encodeErr) return callback(err,null);
+            if(encodeErr) return endCallBack(err,null);
             
             db.playback.insert({ title: title, videoPath: `/videoAsset${videoPath}`, imagePath: `/imageAsset/${image.filename}` },function(err,newDoc){
-                callback(err,newDoc);
+                endCallBack(err,newDoc);
             });
             
         });
