@@ -26,7 +26,7 @@ app.use(authMiddleware);
 // var liveStreamURLList = [];
 
 app.get('/', (req, res) => {
-    return res.status(200).sendFile(`${__dirname}/${Constants.VIEW_ASSET_DIR}/index.html`);
+    return res.status(200).sendFile(`${Constants.VIEW_ASSET_DIR}/index.html`);
 });
 // app.get('/live-stream-list', (req, res) => {
 //     return res.status(200).end(JSON.stringify({ liveStreamURLList }));
