@@ -17,6 +17,8 @@ router.get('/:videoId', function (req, res) {
     });
 })
 router.post('/', function (req, res) {
+    if(req.session===undefined||req.session.passport===undefined||req.session.passport.user===undefined)
+    req.status(401).end("Login with google account to continue");
     const errors = [];
     let content=req.body.content;
     let videoId=req.body.videoId;

@@ -7,21 +7,45 @@ const hls = require('hls-server');
 const bodyParser = require('body-parser');
 const playbackAPI = require('./Middleware/PlaybackAPI');
 const channelAPI = require('./Middleware/ChannelAPI');
-const commentAPI=require('./Middleware/CommentAPI');
+const commentAPI = require('./Middleware/CommentAPI');
 const express = require('express');
 const authMiddleware = require('./Security/AuthencationMiddleware');
 const passport = require('./Security/Passport');
 const expressSession = require('express-session');
-const cors=require('cors');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const { resolveSoa } = require('dns');
 
 
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/comment',expressSession({secret: 'keyboard cat',  resave: true,saveUninitialized: true, cookie: {secure: false, httpOnly: false }}));
-app.use('/comment',passport.initialize());
-app.use('/comment',passport.session());
+
+//Key request
+app.get('/key', (req, res) => {
+    if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+        return res.status(401).json({ message: 'Missing Authorization Header' });
+    }
+
+    const base64Credentials = req.headers.authorization.split(' ')[1];
+    const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+    const [username, password] = credentials.split(':');
+    
+
+    let token=jwt.sign({
+       "username":username, "password":password
+    }, 'MyKey', { expiresIn: '1h' });
+    res.end(token);
+});
+
+
+//Session filter in comment path
+app.use('/comment', expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
+app.use('/comment', passport.initialize());
+app.use('/comment', passport.session());
+
+//JWT Filter
 app.use(authMiddleware);
 
 // var liveStreamURLList = [];
@@ -50,7 +74,7 @@ app.get('/comment/auth/google/callback',
 
 app.use('/video', playbackAPI);
 app.use('/channel', channelAPI);
-app.use('/comment',commentAPI);
+app.use('/comment', commentAPI);
 app.use('/imageAsset', express.static(Constants.IMAGE_ASSET_DIR));
 app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR))
 
