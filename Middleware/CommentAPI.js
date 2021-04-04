@@ -15,6 +15,7 @@ router.get('/:videoId', function (req, res) {
         if(err) return res.status(500).end(err.message);
         res.status(200).end(JSON.stringify(docs));
     });
+    //Nhét thêm vô 
 })
 router.post('/', function (req, res) {
     const errors = [];

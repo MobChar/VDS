@@ -10,8 +10,7 @@ const auth = async (req, res, next) => {
     //Extract token and decode 
     if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
         //Comment use session
-        if (req.url.split('/')[1] === 'comment') {
-            console.log("URL " + req.url);
+        if (req.url.split('/')[1] === 'comment'||req.url.split('/')[1] === 'like'||req.url.split('/')[1] === 'subscribe') {
             //Check if have session
             if (req.session === undefined || req.session.passport === undefined || req.session.passport.user === undefined) res.status(401).end('You must authorized to google modify this resource');
             else next();

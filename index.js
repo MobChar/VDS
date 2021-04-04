@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const playbackAPI = require('./Middleware/PlaybackAPI');
 const channelAPI = require('./Middleware/ChannelAPI');
 const commentAPI = require('./Middleware/CommentAPI');
+const likeAPI = require('./Middleware/LikeAPI');
+const subscribeAPI = require('./Middleware/SubscribeAPI');
 const express = require('express');
 const authMiddleware = require('./Security/AuthencationMiddleware');
 const passport = require('./Security/Passport');
@@ -35,15 +37,19 @@ app.get('/key', (req, res) => {
 
     let token=jwt.sign({
        "username":username, "password":password
-    }, 'MyKey', { expiresIn: '1h' });
+    }, 'MyKey', { expiresIn: '24h' });
     res.end(token);
 });
 
 
 //Session filter in comment path
-app.use('/comment', expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
-app.use('/comment', passport.initialize());
-app.use('/comment', passport.session());
+// app.use('/comment', expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
+// app.use('/comment', passport.initialize());
+// app.use('/comment', passport.session());
+
+app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //JWT Filter
 app.use(authMiddleware);
@@ -75,6 +81,8 @@ app.get('/comment/auth/google/callback',
 app.use('/video', playbackAPI);
 app.use('/channel', channelAPI);
 app.use('/comment', commentAPI);
+app.use('/like',likeAPI);
+app.use('/subscribe',subscribeAPI);
 app.use('/imageAsset', express.static(Constants.IMAGE_ASSET_DIR));
 app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR))
 
