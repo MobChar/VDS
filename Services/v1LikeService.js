@@ -1,4 +1,5 @@
 const db = require('../DB/NeDB');
+const { like } = require('./v1Service');
 
 
 
@@ -48,6 +49,55 @@ service.likeVideo = function (videoId, googleId, callback) {
         }
     });
 
+}
+
+service.unlikeVideo=function(videoId, googleId, callback){
+    db.playback.findOne({ _id: videoId }, function (err, docs) {
+        //get all like in docs
+        //check key if like exist
+        if (err) {
+            return callback(err, null);
+        }
+        else if (docs===null) {
+            return callback(new Error("Video not found"), null);
+        }
+        else {
+            let likes = docs.like;
+            if(!likes.includes(googleId)){
+                return callback(new Error("You didn't like this video"), null)
+            }
+            likes = likes.filter(item => item !== googleId);
+
+            db.playback.update({ _id: videoId }, { $set: { like: likes }}, function (err2, numReplaced, upsert) {
+                if (err2) return callback(err2, null);
+                else return callback(null, numReplaced);
+            });
+
+        }
+    });
+};
+
+service.unlikeComment = function (commentId, googleId, callback) {
+    db.comment.findOne({_id:commentId},function(err,docs){
+        if (err) {
+            return callback(err, null);
+        }
+        else if (docs===null) {
+            return callback(new Error("Comment not found"), null);
+        }
+        else {
+            let likes = docs.like;
+            if(!likes.includes(googleId)){
+                return callback(new Error("You didn't like this comment"), null)
+            }
+            likes = likes.filter(item => item !== googleId);
+
+            db.comment.update({ _id: commentId }, { $set: { like: likes }}, function (err2, numReplaced, upsert) {
+                if (err2) return callback(err2, null);
+                else return callback(null, numReplaced);
+            });
+        }
+    })
 }
 
 module.exports=service;
