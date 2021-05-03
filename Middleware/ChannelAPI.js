@@ -7,7 +7,8 @@ const services=require('../Services/v1Service');
 //channel/
 //All channel
 router.get('',function(req,res){
-    services.channel.getAllChannel( (err, docs) => {
+    //Neu co session tra ve xem da subscribe kenh chua
+    services.channel.getAllChannel(req.session===undefined||req.session.passport===undefined?null:req.session.passport.user.id, (err, docs) => {
         if(err) return res.status(500).end(err.message);
         return res.status(200).end(JSON.stringify(docs));
     })

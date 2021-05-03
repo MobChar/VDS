@@ -13,7 +13,29 @@ service.getChannel = function (channelId, callback) {
         else callback(err, docs);
     });
 };
-service.getAllChannel = function (callback) {
+
+service.getAllChannel = function (userId,callback) {
+    if(userId===null)
+    db.channel.find({}, function (err, docs) {
+        let count=0;
+        let res=[];
+        docs.forEach(channel=>{
+            db.subscribe.findOne({channelId: channel._id,googleId: userId},function(err,doc){
+                ++count;
+                if(doc!==null) {
+                    channel.subscribed=true;
+                    res.push(channel);
+                }
+                else{
+                    channel.subscribed=false;
+                    res.push(channel);
+                } 
+                if(count===docs.length) callback(null,res);
+            })
+        })
+    });
+    else
+
     db.channel.find({}, function (err, docs) {
         callback(err, docs);
     });

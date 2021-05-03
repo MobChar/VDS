@@ -35,9 +35,10 @@ router.get('/:videoId', function (req, res) {
 
 
 router.get('/', function (req, res) {
-    if (req.session === undefined || req.session.passport === undefined || req.session.passport.user === undefined) return res.status(401).end('You must authorized to google modify this resource');
-
+     
     if (req.query.channelId === undefined) {
+        if (req.session === undefined || req.session.passport === undefined || req.session.passport.user === undefined) return res.status(401).end('You must authorized to google to get suggest video');
+
         services.playback.suggestVideo(req.session.passport.user.id, function(err, docs) {
             if (err) return res.status(500).end(err.message);
             return res.status(200).end(JSON.stringify(docs));
@@ -75,6 +76,27 @@ router.post('/', cpUpload, function (req, res) {
             if (err) return res.status(500).end(err.message);
             return res.end();
         })
+})
+
+router.put('/',cpUpload,function(req,res){
+    const modifyAttributes={};
+    if(req.body.videoId===undefined) return res.status(400).status("Modify videoId is missing");
+    if (typeof req.body.title === 'string' && validator.isLength(req.body.title, { min: 5, max: 100 })) modifyAttributes.title=req.body.title;
+    if (typeof req.body.description === 'string' && validator.isLength(req.body.description, { min: 5, max: 100 })) modifyAttributes.description=req.body.description;
+
+    services.playback.modifyVideo(req.channel._id,req.body.videoId,modifyAttributes,req.files===undefined||req.files.image===undefined?null:req.files.image[0], function(err2, docs2) {
+        if (err2) return res.status(500).end(err2.message);
+        res.status(200).end(JSON.stringify(docs2));
+    })
+
+    
+})
+
+router.delete('/',function(req,res){
+    services.playback.deleteVideo(req.channel._id,req.body.videoId, function(err2, docs2) {
+        if (err2) return res.status(500).end(err2.message);
+        res.status(200).end(JSON.stringify(docs2));
+    })
 })
 
 module.exports = router;

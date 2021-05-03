@@ -6,6 +6,8 @@ const { json } = require('express');
 
 
 
+
+
 service = {};
 service.getVideo = function (videoId, callback) {
     db.playback.find({ _id: videoId }, function (err, docs) {
@@ -67,9 +69,6 @@ service.suggestVideo = function (googleId, callback) {//All video from subscribe
 
         }
     })
-    // db.playback.find({}, function (err, docs) {
-    //     callback(err, docs);
-    // });
 }
 
 service.increaseView = function (videoId, callback) {
@@ -100,5 +99,27 @@ service.uploadVideo = function (channelId, title, description, image, video, pro
 
 }
 
+service.modifyVideo=function(channelId, videoId,attribute,image, callback){
+        if(image!==null)
+        attribute.imagePath=`/imageAsset/${image.filename}`;
+        console.log(attribute);
+        db.playback.update({ channelId:channelId, _id: videoId }, { $set: attribute }, function (err2, numReplaced, upsert) {
+            if (err2) return callback(err2, null);
+            else {
+                if(numReplaced===0) return callback(new Error("Modify video failed. You don't have permission to modify this resource"));
+                return callback(null, numReplaced);
+            }
+        });
+}
+
+service.deleteVideo=function(channelId,videoId,callback){
+    console.log(channelId);
+    console.log(videoId);
+    db.playback.remove({channelId:channelId,_id:videoId},function(err,numRemoved){
+        if(err) return callback(err,null);
+        else if(numRemoved===0) return callback(new Error("Delete video failed. You don't have permission to modify this resource"));
+        else return callback(null,numRemoved);
+    })
+}
 
 module.exports = service;

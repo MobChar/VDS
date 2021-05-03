@@ -17,7 +17,7 @@ const expressSession = require('express-session');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const { resolveSoa } = require('dns');
-
+const db = require('./DB/NeDB');
 
 
 app.use(cors());
@@ -35,10 +35,24 @@ app.get('/key', (req, res) => {
     const [username, password] = credentials.split(':');
     
 
-    let token=jwt.sign({
-       "username":username, "password":password
-    }, 'MyKey', { expiresIn: '24h' });
-    res.end(token);
+   
+
+    let channel = db.channel.find({ username: username, password: password }, function (err, docs) {
+        if (docs.length > 0) {
+
+            req.channel = docs[0];
+            let token=jwt.sign({
+                "username":username, "password":password
+             }, 'MyKey', { expiresIn: '24h' });
+
+            return res.status(200).json({token: token, channel:req.channel});
+            // next();
+        }
+        else {
+            return res.status(401).end('Authorization credentials not valid');
+        }
+    });
+  
 });
 
 
@@ -77,6 +91,10 @@ app.get('/comment/auth/google/callback',
         successRedirect: '/comment/auth/google/success',
         failureRedirect: '/comment/auth/google/failure'
     }));
+
+app.get('/comment/auth/google/success',function(req,res){
+    res.status(200).end(req.session.passport.user.id+"");
+})
 
 app.use('/video', playbackAPI);
 app.use('/channel', channelAPI);
