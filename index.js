@@ -20,11 +20,11 @@ const { resolveSoa } = require('dns');
 const db = require('./DB/NeDB');
 
 
-app.use({origin: function(origin, callback){
+app.use(cors({origin: function(origin, callback){
     return callback(null, true);
   },
   optionsSuccessStatus: 200,
-  credentials: true});
+  credentials: true}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
