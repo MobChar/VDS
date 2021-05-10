@@ -15,7 +15,7 @@ service.getChannel = function (channelId, callback) {
 };
 
 service.getAllChannel = function (userId,callback) {
-    if(userId===null)
+    if(userId!==null)
     db.channel.find({}, function (err, docs) {
         let count=0;
         let res=[];
