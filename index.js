@@ -21,7 +21,7 @@ const db = require('./DB/NeDB');
 
 
 app.use(cors({origin: function(origin, callback){
-    return callback(null, true);
+    return callback(null, [origin]);
   },
   optionsSuccessStatus: 200,
   credentials: true}));
