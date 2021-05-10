@@ -28,6 +28,14 @@ app.use(cors({origin: function(origin, callback){
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+app.get('/demo',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./test.html'));  
+        res.end();  
+
+})
+
 //Key request
 app.get('/key', (req, res) => {
     if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {

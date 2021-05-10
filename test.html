@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        </head>
+
+    <body>
+        <script>
+function getAllVideo(){
+       
+    document.cookie = "connect.sid=s%3A9WGrfOG2fwVKss2N-lcg_P5LcD4K3Iuj.x3oyUqRHqXlkFKsbb99xJBLEcYx0hiEXiF6iRJQOcOE;path=/;";
+
+    $.ajax
+    ({
+      type: "GET",
+      url: "https://video-vds.herokuapp.com/video",
+      dataType: 'json',
+
+      // cache: false,
+      crossDomain: true,
+      xhrFields: {withCredentials: true},
+      success: function (result){
+        alert("Get video sccuess");
+      },
+      error: function (error){
+          console.log(error);
+        alert("Can not get video");
+      }
+    });
+    
+  }
+  
+  getAllVideo();
+
+</script>
+  
+</body>
+  </html>
