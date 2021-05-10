@@ -24,7 +24,7 @@ let allChannelVideo = function (channelId, callback) {
 
             //Most viewed
             let trendy = {};
-            let tmp = 0;
+            let tmp = -99999;
             for (i = 0; i < docs.length; i++) {
                 if (docs[i].view > tmp) {
                     tmp = docs[i].view;
