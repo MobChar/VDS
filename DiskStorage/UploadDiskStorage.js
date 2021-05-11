@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
         }
 
         let ext = path.extname(file.originalname);
-        if (ext === '.jpg' || ext == '.png')
+        if (ext === '.jpg')
             cb(null, Constants.IMAGE_ASSET_DIR);
         else if (ext === '.mp4')
             cb(null, Constants.VIDEO_ASSET_DIR);
@@ -31,7 +31,7 @@ var upload = multer({
     storage: storage,
     fileFilter: function (req, file, cb) {
         let ext = path.extname(file.originalname);
-        if (ext === '.jpg' || ext === '.png' || ext === '.mp4')
+        if (ext === '.jpg' ||  ext === '.mp4')
             cb(null, true)
         else cb(null, false)
 
