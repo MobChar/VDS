@@ -58,7 +58,7 @@ service.suggestVideo = function (googleId, callback) {//All video from subscribe
 
                     }
                     else {
-                        videoList = videoList.concat(videoList, docs2);
+                        videoList = videoList.concat(docs2);
                         ++count;
                         if (count == docs.length) {
                             return callback(null, videoList);
