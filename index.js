@@ -118,7 +118,9 @@ app.use('/comment', commentAPI);
 app.use('/like',likeAPI);
 app.use('/subscribe',subscribeAPI);
 app.use('/imageAsset', express.static(Constants.IMAGE_ASSET_DIR));
-app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR))
+app.use('/videoAsset', express.static(Constants.VIDEO_ASSET_DIR));
+app.use('/static',express.static(Constants.STATIC_ASSET_DIR));
+
 
 //Init server
 const server = app.listen(process.env.PORT || 3000);
