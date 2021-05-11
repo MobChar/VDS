@@ -108,6 +108,10 @@ app.get('/comment/auth/google/success',function(req,res){
     res.status(200).end(req.session.passport.user.id+"");
 })
 
+app.get('/comment/auth/info',function(req,res){
+    res.status(200).json(req.session.passport.user);
+})
+
 app.use('/video', playbackAPI);
 app.use('/channel', channelAPI);
 app.use('/comment', commentAPI);
