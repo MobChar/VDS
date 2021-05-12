@@ -1,4 +1,5 @@
 const db = require('../DB/NeDB');
+const { unsubscribe } = require('./v1PlaybackService');
 
 
 
@@ -51,4 +52,18 @@ service.addVideoComment = function (userId, videoId, content, callback) {
     
 }
 
+
+service.deleteVideoComment=function(commentId,userId,callback){
+    db.comment.remove({googleId: userId, _id:commentId},function(err,deleteNum){
+        if(err){
+            callback(err,null);
+        }
+        else if(deleteNum > 0){
+            callback(err,deleteNum);
+        }
+        else{
+            callback(new Error("You don't have permission to delete this comment"),null);
+        }
+    })
+}
 module.exports=service;

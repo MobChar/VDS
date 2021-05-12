@@ -33,5 +33,18 @@ router.post('/', function (req, res) {
             if(err) return res.status(500).end(err.message);
             res.status(200).end("OK");
         });
+});
+
+router.delete('/:commentId',function(req,res){
+    const errors = [];
+    if (typeof req.params.commentId!=='string'||!validator.isLength(req.params.commentId, { min: 5, max: 100 })) errors.push({ path: "commentID", message: "string from 5-100" });
+    if (errors.length > 0) {
+        return res.status(400).json({ errors: errors });
+    }
+
+    services.comment.deleteVideoComment(req.params.commentId,req.session.passport.user.id,(err,numDeleted)=>{
+        if(err) return res.status(500).end(err.message);
+        res.status(200).end(JSON.stringify(numDeleted));
+    });
 })
 module.exports = router;
