@@ -113,11 +113,9 @@ service.modifyVideo=function(channelId, videoId,attribute,image, callback){
 }
 
 service.deleteVideo=function(channelId,videoId,callback){
-    console.log(channelId);
-    console.log(videoId);
     db.playback.remove({channelId:channelId,_id:videoId},function(err,numRemoved){
         if(err) return callback(err,null);
-        else if(numRemoved===0) return callback(new Error("Delete video failed. You don't have permission to modify this resource"));
+        else if(numRemoved===0) return callback(new Error("Delete video failed. You don't have permission to modify this resource or video not found"));
         else return callback(null,numRemoved);
     })
 }
