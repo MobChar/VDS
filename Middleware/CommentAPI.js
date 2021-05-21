@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
             if(err) return res.status(500).end(err.message);
             res.status(200).end("OK");
         });
-});
+})
 
 router.delete('/:commentId',function(req,res){
     const errors = [];

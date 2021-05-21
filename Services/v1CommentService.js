@@ -1,5 +1,4 @@
 const db = require('../DB/NeDB');
-const { unsubscribe } = require('./v1PlaybackService');
 
 
 
@@ -9,8 +8,8 @@ service.getVideoComment = function (videoId, callback) {
         let arr=[];
         let count=0;
 
-        console.log("VideoId: "+videoId);
-        console.log(docs);
+        // console.log("VideoId: "+videoId);
+        // console.log(docs);
     
         if(docs.length===0)  callback(null,[]);
         for(i=0;i<docs.length;i++){   
@@ -52,7 +51,6 @@ service.addVideoComment = function (userId, videoId, content, callback) {
     
 }
 
-
 service.deleteVideoComment=function(commentId,userId,callback){
     db.comment.remove({googleId: userId, _id:commentId},function(err,deleteNum){
         if(err){
@@ -66,4 +64,5 @@ service.deleteVideoComment=function(commentId,userId,callback){
         }
     })
 }
+
 module.exports=service;

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This is social network html5 template available in themeforest......" />
+		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+		<meta name="robots" content="index, follow" />
+		<title>News Feed </title>
+
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="/static/User/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/static/User/css/style.css" />
+    <link rel="stylesheet" href="/static/User/css/ionicons.min.css" />
+    <link rel="stylesheet" href="/static/User/css/font-awesome.min.css" /> -->
+    <link href="/static/User/css/emoji.css" rel="stylesheet">
+    
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="/View/User/images/fav.png"/>
+    <script src="/static/User/js/jquery-3.1.1.min.js"></script>
+    <style>
+     
+      .resize {
+        width: 100%;
+        height: 400px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid black;
+      }
+    </style>
+	</head>
+  <body>
+
+    <!-- Header
+    ================================================= -->
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index-register.html"><img src="/static/User/images/logo.png" alt="logo" /></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-right hidden-sm">
+              <div class="form-group">
+                
+              </div>
+              <a class="btn btn-info mt-3" onclick="logout()">LogOut</a>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
+
+    <div id="page-contents">
+    	<div class="container">
+    		<div class="row">
+
+          <!-- Newsfeed Common Side Bar Left
+          ================================================= -->
+    			<div class="col-md-3 static">
+            <div class="profile-card">
+            	<img   id="imageUser"src="" alt="user" class="profile-photo" />
+            	<h5><a id="nameUser" class="text-white">Anonymous</a></h5>
+            </div><!--profile card ends-->
+            <ul class="nav-news-feed">
+              <li><i class="icon ion-ios-paper"></i><div><a href="/newfeed">Newsfeed</a></div></li>
+              <li><i class="icon ion-ios-people"></i><div><a href="/allchannel">Channel</a></div></li>
+            </ul><!--news-feed links ends-->
+            
+          </div>
+          
+    			<div class="col-md-7" id="list-video">
+            <!-- Post Content================================================= -->
+            
+          </div>
+
+          <!-- Newsfeed Common Side Bar Right
+          ================================================= -->
+    			
+    		</div>
+    	</div>
+    </div>
+
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+      <div class="container">
+      	<div class="row">
+          <div class="footer-wrapper">
+            <div class="col-md-3 col-sm-3">
+              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
+              <ul class="list-inline social-icons">
+              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <h5>Contact Us</h5>
+              <ul class="contact">
+                <li><i class="icon ion-ios-telephone-outline"></i>0909451565</li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <ul class="contact">
+                <li></li>
+                <li><i class="icon ion-ios-email-outline"></i>funvideo@gmail.com</li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <ul class="contact">
+                <li></li>
+                <li><i class="icon ion-ios-location-outline"></i>97 Man Thien, Hiep Phu, Quan 9, HCM</li>
+              </ul>
+            </div>
+          </div>
+      	</div>
+      </div>
+      <div class="copyright">
+        <p>Thunder Team © 2016. All rights reserved</p>
+      </div>
+		</footer>
+    
+    <!--preloader-->
+    <div id="spinner-wrapper">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- Scripts
+    ================================================= -->
+    
+    
+    <script src="/static/User/js/bootstrap.min.js"></script>
+    <script src="/static/User/js/jquery.sticky-kit.min.js"></script>
+    <script src="/static/User/js/jquery.scrollbar.min.js"></script>
+    <script src="/static/User/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      var strHost = "http://localhost:3000";
+      var channelName,channelImage, googleID;
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+      function getCookie(cname) {
+        var name = cname + '=';
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return '';
+      }
+
+      $(document).ready(function(){
+        if(getCookie('connect.sid')==''){
+          location.href = strHost+'/login';
+        }
+        getInfoUser();
+        getVideo();
+        getComment();
+      });
+      function logout() {
+        document.cookie = 'connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'googleId=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'image=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'name=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        location.href = '/login';
+      }
+      function getInfoChannel(id){
+        $.ajax
+        ({
+          type: "GET",
+          url: strHost+"/channel/"+id,
+          dataType: 'json',
+          async : false,
+          success: function (result){
+            channelImage= result.image;
+            channelName = result.channelName;
+          },
+          error: function (error){
+            alert("Get info channel fail");
+          }
+        });
+      }
+
+      function getVideo(){
+        $.ajax
+        ({
+          type: "GET",
+          url: strHost+"/video/"+getParameterByName('id'),
+          dataType: 'json',
+
+          crossDomain: true,
+          xhrFields: {
+              withCredentials: true
+          },
+          success: function (result){
+            $('#list-video').empty();
+            $.each(result, function (index, value) {
+              //check channel have a video or not
+                getInfoChannel(value.channelId);
+                var like = false;
+                $.each(value.like, function (index, value) {
+                  if(value == googleID) like = true;
+                });
+                addVideo(channelName,channelImage,value.title,value.description,
+                          value.videoPath[0],value._id, like, value.like.length);
+                
+            });
+          },
+          error: function (error){
+            alert("Can not get video");
+          }
+        });
+      }
+      function addVideo(channelName, channelImage, title, description,
+                          videoPath, idVideo, like, numberLike){
+        var str="<div class=\"post-content\"> "+
+            "  <video class=\"post-video\" id=\"video\" controls></video> "+
+            "  <div class=\"post-container\"> "+
+            "    <img src=\""+strHost+channelImage+"\" alt=\"user\" class=\"profile-photo-md pull-left\" /> "+
+            "    <div class=\"post-detail\"> "+
+            "      <div class=\"user-info\"> "+
+            "        <h5><a href=\"#\" class=\"profile-link\">"+channelName+"</a> <span class=\"following\">Subcribed</span></h5> "+
+            "      </div> "+
+            "      <div class=\"reaction\"> "+
+            "        <a class=\"btn text-green\"><i id=\"like"+idVideo+"\" value=\"\" onclick=\"like('"+idVideo+"')\">"+numberLike+"</i></a> "+
+            "      </div> "+
+            "      <div class=\"line-divider\"></div> "+
+            "      <div class=\"post-text\"> "+
+            "        <p><b>"+title+"</b><br>"+description+"</p> "+
+            "      </div> "+
+            "      <div class=\"line-divider\"></div>"+
+            "      <div id=\"container-comment-video\"></div>"+
+            "    </div> "+
+            "  </div> "+
+            "</div>";
+        $('#list-video').prepend(str);
+        // init button like
+        if(like){
+          $('#like'+idVideo).addClass('fa fa-thumbs-up');
+          $('#like'+idVideo).val(1);
+        }
+        else{
+          $('#like'+idVideo).addClass('fa fa-thumbs-o-up');
+          $('#like'+idVideo).val(0);
+        }
+        //playvideo
+        var video = document.getElementById('video');
+				var videoSrc=videoPath;
+				if(Hls.isSupported()){
+					var hls = new Hls();
+					hls.loadSource(videoSrc);
+					hls.attachMedia(video);
+				}
+				else if(video.canPlayType('application/vnd.apple.mpegurl')){
+					video.src = videoSrc;
+				}
+      }
+
+      function like(idVideo){
+        var method,numberLike = parseInt($('#like'+idVideo).text());
+        $('#like'+idVideo).removeAttr('class');
+        if($('#like'+idVideo).val() == 1){
+          $('#like'+idVideo).addClass('fa fa-thumbs-o-up');
+          $('#like'+idVideo).val(0);
+          method = 'DELETE';
+        }
+        else{
+          $('#like'+idVideo).addClass('fa fa-thumbs-up');
+          $('#like'+idVideo).val(1);
+          method = 'POST';
+        }
+        $.ajax
+        ({
+          type: method,
+          url: strHost+"/like/video/"+idVideo,
+          dataType: 'json',
+          async : false,
+          crossDomain: true,
+          xhrFields: {
+              withCredentials: true
+          },
+          success: function (result){},
+          error: function (error){}
+        });
+        refeshLike(idVideo);
+      }
+
+      function getInfoUser(){
+        var imageUser =  document.getElementById('imageUser');
+            imageUser.src = getCookie('image');
+            googleID = getCookie('googleId');
+            $('#nameUser').text(getCookie('name'));
+      }
+
+    function getComment(){
+			$.ajax
+			({
+				type: "GET",
+				url: strHost+"/comment/"+getParameterByName('id'),
+				dataType: 'json',
+				success: function (result){
+					$('#container-comment-video').empty();
+          var googleId = getCookie('googleId');
+					$.each(result, function (index, value) {
+            var str ="<div class=\"post-comment\"> "+
+              "      <img src=\""+value.user.image+"\" alt=\"avatar\" class=\"profile-photo-sm\" /> "+
+              "      <p><a class=\"profile-link\">"+value.user.name+"</a>"+" "+value.content+"</p> "+
+              "      <a class=\"btn text-green\"><i id=\"cmt"+value._id+"\" value=\"\" onclick=\"likeComment('"+value._id+"')\"></i></a> ";
+              if(googleId == value.googleId){
+                str+="<a class=\"text-red\" onclick=\"deleteComment('"+value._id+"')\">Xoá</a>"
+              }
+              str+="</div> ";
+			      
+              $('#container-comment-video').prepend(str);
+            var like = false;
+            $.each(value.like, function (index, value) {
+              if(value == googleID) like = true;
+            });
+            
+            if(like){
+              $('#cmt'+value._id).addClass('fa fa-thumbs-up');
+              $('#cmt'+value._id).val(1);
+            }
+            else{
+              $('#cmt'+value._id).addClass('fa fa-thumbs-o-up');
+              $('#cmt'+value._id).val(0);
+            }
+					});
+          var strinput="<div class=\"post-comment\"> "+
+              "      <img src=\""+getCookie('image')+"\" alt=\"avatar\" class=\"profile-photo-sm\" /> "+
+              "      <input type=\"text\" id=\"contentCmt\" class=\"form-control\" placeholder=\"Post a comment\"> "+
+              "      <button class=\"btn btn-info\" onclick=\"postComment()\">Post</button>"
+              "</div> ";
+          $('#container-comment-video').prepend(strinput);
+				}
+			});
+		}
+
+    function postComment(){
+      var content = $('#contentCmt').val();
+      if(content.length<5){
+        $('#contentCmt').focus();
+      }else{
+        var data = {};
+        data['videoId'] = getParameterByName('id');
+        data['content'] = content;
+        $('#contentCmt').val('');
+
+        $.ajax
+        ({
+          type: "POST",
+          url: strHost+"/comment",
+          dataType: 'json',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          async : false,
+          crossDomain: true,
+          xhrFields: {
+              withCredentials: true
+          },
+          success: function (result){
+            getComment();
+          },
+          error: function (xhr, status, error){
+            getComment();
+          }
+        });
+      }
+    }
+
+    function likeComment(id){
+        var method,numberLike = parseInt($('#cmt'+id).text());
+        $('#cmt'+id).removeAttr('class');
+        if($('#cmt'+id).val() == 1){
+          $('#cmt'+id).addClass('fa fa-thumbs-o-up');
+          $('#cmt'+id).val(0);
+         
+          method = 'DELETE';
+        }
+        else{
+          $('#cmt'+id).addClass('fa fa-thumbs-up');
+          $('#cmt'+id).val(1);
+         
+          method = 'POST';
+        }
+        $.ajax
+        ({
+          type: method,
+          url: strHost+"/like/comment/"+id,
+          dataType: 'json',
+          crossDomain: true,
+          xhrFields: {
+              withCredentials: true
+          },
+          success: function (result){},
+          error: function (error){}
+        });
+      }
+
+      function deleteComment(id){
+        $.ajax
+        ({
+          type: 'DELETE',
+          url: strHost+"/comment/"+id,
+          dataType: 'json',
+          crossDomain: true,
+          xhrFields: {
+              withCredentials: true
+          },
+          success: function (result){getComment();},
+          error: function (error){getComment();}
+        });
+      }
+      function refeshLike(idVideo){
+        $.ajax
+        ({
+          type: "GET",
+          url: strHost+"/video/"+idVideo,
+          dataType: 'json',
+          async : false,
+          success: function (result){
+            console.log(result[0].like.length);
+            console.log(result[0]);
+            $('#like'+idVideo).text(result[0].like.length);
+          },
+          error: function (error){
+            alert("Refresh like fail");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

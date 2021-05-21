@@ -28,8 +28,36 @@ function getAllVideo(){
     });
     
   }
-  
-  getAllVideo();
+  function getInfoChannel(id){
+        $.ajax
+        ({
+          type: "GET",
+          url: "/channel/"+id,//value.allVideo[0].channelId,
+          dataType: 'json',
+          success: function (result){
+            console.log(result);
+          },
+          error: function (error){
+            alert("Get info channel fail");
+          }
+        });
+      }
+      function refreshLike(idVideo){
+        $.ajax
+        ({
+          type: 'GET',
+          url: "/video/"+idVideo,
+          dataType: 'json',
+          success: function (result){
+            //$('#like'+idVideo).text(result.like.length);
+            alert('refresh like success');
+            console.log(result);
+          },
+          error: function (error){alert('refresh like fail');}
+        });
+      }
+  //getAllVideo();
+  refreshLike('jqZR9GiGjBWdvEoQ');
 
 </script>
   

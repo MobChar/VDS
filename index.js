@@ -35,7 +35,49 @@ app.get('/demo',(req,res)=>{
         res.end();  
 
 })
-
+// change code after clone
+app.use('/static', express.static('./public'));
+app.get('/login',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/User/Login.html'));  
+        res.end();
+})
+app.get('/newfeed',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/User/NewFeeds.html'));  
+        res.end();
+})
+app.get('/detail',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/User/DetailVideo.html'));  
+        res.end();
+})
+app.get('/allchannel',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/User/Channel.html'));  
+        res.end();
+})
+app.get('/allchannel/channel',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/User/DetailChannel.html'));  
+        res.end();
+})
+app.get('/admin/login',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/Admin/Login.html'));  
+        res.end();
+})
+app.get('/admin/managevideo',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/Admin/ManageVideo.html'));  
+        res.end();
+})
+app.get('/admin/video/detail',(req,res)=>{
+    res.writeHeader(200, {"Content-Type": "text/html"});  
+        res.write( fs.readFileSync('./View/Admin/DetailVideo.html'));  
+        res.end();
+})
+// end change code 
 //Key request
 app.get('/key', (req, res) => {
     if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {

@@ -54,6 +54,7 @@ router.get('/', function (req, res) {
 
 })
 
+var responseOnUploadProgress={};
 
 //Upload video
 var cpUpload = upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]);
@@ -67,16 +68,50 @@ router.post('/', cpUpload, function (req, res) {
         return res.status(400).json({ errors: errors });
     }
 
+    
 
     services.playback.uploadVideo(req.channel._id, req.body.title, req.body.description, req.files.image[0], req.files.video[0],
-        (progress) => {
-            res.write(progress.timemark + '\n');
+        (progressInPercent) => {         
+        //    console.log(responseOnUploadProgress);
+            res.write(progressInPercent + '\n');
+            if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
+                // console.log('asd');
+                responseOnUploadProgress[req.channel._id+''].write("data: "+progressInPercent+"\n\n" );
+            }
         },
         (err, newDoc) => {
-            if (err) return res.status(500).end(err.message);
-            return res.end();
+            if (err) {
+                if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
+                responseOnUploadProgress[req.channel._id+''].end();
+
+                delete responseOnUploadProgress[req.channel._id+''];
+                }
+                
+
+                return res.status(500).end(err.message);
+            }
+            else{
+                if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
+                    responseOnUploadProgress[req.channel._id+''].end();
+    
+                    delete responseOnUploadProgress[req.channel._id+''];
+                    }
+               
+               
+                return res.end();
+            }
         })
-})
+});
+router.get('/upload/progress',function(req,res){
+    const errors = [];
+    if (typeof req.query.channelId !== 'string' || !validator.isLength(req.query.channelId, { min: 5, max: 100 })) errors.push({ path: "channelId", message: "string from 5-100" });
+    if (errors.length > 0) {
+        return res.status(400).json({ errors: errors });
+    }
+    responseOnUploadProgress[req.query.channelId]=res;
+    res.writeHeader(200, {"Content-Type": "text/event-stream"});  
+});
+
 
 router.put('/',cpUpload,function(req,res){
     const modifyAttributes={};
