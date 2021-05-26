@@ -151,7 +151,7 @@ app.get('/comment/auth/google/success',function(req,res){
         'Location': '/newfeed'
         //add other headers here...
       });
-    res.end(req.session.passport.user.id+" oooooooooooo");
+    res.end(req.session.passport.user.id);
 })
 
 app.get('/comment/auth/info',function(req,res){
