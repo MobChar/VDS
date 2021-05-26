@@ -42,6 +42,10 @@ app.get('/login',(req,res)=>{
         res.write( fs.readFileSync('./View/User/Login.html'));  
         res.end();
 })
+app.get('/logout',(req,res)=>{
+    req.session.destroy();
+    res.status(200).end("OK");
+})
 app.get('/newfeed',(req,res)=>{
     res.writeHeader(200, {"Content-Type": "text/html"});  
         res.write( fs.readFileSync('./View/User/NewFeeds.html'));  
