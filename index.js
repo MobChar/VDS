@@ -147,7 +147,11 @@ app.get('/comment/auth/google/callback',
     }));
 
 app.get('/comment/auth/google/success',function(req,res){
-    res.status(200).end(req.session.passport.user.id+"");
+    res.writeHead(302, {
+        'Location': '/newfeed'
+        //add other headers here...
+      });
+    res.end(req.session.passport.user.id+"");
 })
 
 app.get('/comment/auth/info',function(req,res){
