@@ -29,6 +29,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+
+//Session filter in comment path
+// app.use('/comment', expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
+// app.use('/comment', passport.initialize());
+// app.use('/comment', passport.session());
+
+app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.get('/demo',(req,res)=>{
     res.writeHeader(200, {"Content-Type": "text/html"});  
         res.write( fs.readFileSync('./test.html'));  
@@ -36,13 +47,14 @@ app.get('/demo',(req,res)=>{
 
 })
 // change code after clone
-app.use('/static', express.static('./public'));
+// app.use('/static', express.static('./public'));
 app.get('/login',(req,res)=>{
     res.writeHeader(200, {"Content-Type": "text/html"});  
         res.write( fs.readFileSync('./View/User/Login.html'));  
         res.end();
 })
 app.get('/logout',(req,res)=>{
+    if(req.session!=undefined)
     req.session.destroy();
     res.status(200).end("OK");
 })
@@ -113,15 +125,6 @@ app.get('/key', (req, res) => {
   
 });
 
-
-//Session filter in comment path
-// app.use('/comment', expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
-// app.use('/comment', passport.initialize());
-// app.use('/comment', passport.session());
-
-app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { secure: false, httpOnly: false } }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 //JWT Filter
 app.use(authMiddleware);
