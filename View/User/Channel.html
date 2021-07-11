@@ -181,7 +181,7 @@
       }
 
       $(document).ready(function(){
-        if(getCookie('connect.sid')==''){
+        if(getCookie('connect.sid')==''||getCookie('googleId')==''){
           location.href = strHost+'/login';
         }
         getInfoUser();
