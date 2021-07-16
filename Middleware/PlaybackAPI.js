@@ -58,7 +58,8 @@ var responseOnUploadProgress={};
 
 //Upload video
 var cpUpload = upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]);
-router.post('/', cpUpload, function (req, res) {
+router.post('/', cpUpload, function (req, res,uploadErr){
+    if(uploadErr)  return res.status(400).end(uploadErr.message); 
     const errors = [];
     if (typeof req.body.title !== 'string' || !validator.isLength(req.body.title, { min: 5, max: 100 })) errors.push({ path: "title", message: "string from 5-100" });
     if (typeof req.body.description !== 'string' || !validator.isLength(req.body.description, { min: 5, max: 100 })) errors.push({ path: "description", message: "string from 5-100" });
