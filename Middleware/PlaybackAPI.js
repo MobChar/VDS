@@ -130,7 +130,7 @@ router.put('/',function(req,res){
             if (err2) return res.status(500).end(err2.message);
             res.status(200).end(JSON.stringify(docs2));
         })
-    }
+    });
     
 })
 
