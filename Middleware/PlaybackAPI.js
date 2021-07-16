@@ -60,7 +60,7 @@ var responseOnUploadProgress={};
 var cpUpload = upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]);
 router.post('/',function (req, res){
     cpUpload(req, res, err => {
-        if(err)  return res.status(400).end(uploadErr.message); 
+        if(err)  return res.status(400).end(err.message); 
 
         const errors = [];
         if (typeof req.body.title !== 'string' || !validator.isLength(req.body.title, { min: 5, max: 100 })) errors.push({ path: "title", message: "string from 5-100" });

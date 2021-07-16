@@ -24,24 +24,21 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         let ext = path.extname(file.originalname);
         cb(null, Date.now() + ext);
-    }
+    },
+   
 })
 
 var upload = multer({
     storage: storage,
+    limits:{
+        fileSize: 1024*1024*10,
+    },
     fileFilter: function (req, file, cb) {
         let ext = path.extname(file.originalname);
-        if (ext === '.jpg' ){
-            if (file.size<=1024)
-             return cb(null, true);
-            else return cb(new Error('Image size <= 1024 bytes'));
+        if (ext === '.jpg' ||  ext === '.mp4'){
+            cb(null, true);
         }
-        else if(ext === '.mp4'){
-            if (file.size<=10240)
-            return cb(null, true);
-           else return cb(new Error('Video size <= 10240 bytes'));
-        }
-        else cb(new Error('File type not supported'));
+        else cb(new Error('File type not supported'))
 
         // // You can always pass an error if something goes wrong:
         // cb(new Error('File type not supported'))

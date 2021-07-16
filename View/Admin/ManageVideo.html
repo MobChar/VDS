@@ -2,463 +2,477 @@
 <html lang="en">
 
 <head>
-	<title>Login</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/static/Admin/images/icons/favicon.ico" />
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/vendor/animate/animate.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/vendor/css-hamburgers/hamburgers.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/vendor/select2/select2.min.css">
-	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/static/Admin/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/static/Admin/css/main.css">
-	<script src="/static/Admin/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-	<!--===============================================================================================-->
-	<style>
-		.sidebar-menu {
-			position: fixed;
-			left: 0;
-			top: 0;
-			z-index: 99;
-			height: 100vh;
-			width: 280px;
-			overflow: hidden;
-			background: #303641;
-			box-shadow: 2px 0 32px rgba(0, 0, 0, 0.05);
-			-webkit-transition: all 0.3s ease 0s;
-			transition: all 0.3s ease 0s;
-		}
-
-		.main-content {
-			background: lightgrey;
-			left: 280px;
-		}
-
-		.flex-container {
-			display: flex;
-			flex-wrap: wrap;
-			width: 100%;
-		}
-
-		.col-sm-4>video {
-			display: block;
-			max-width: 230px;
-			max-height: 230px;
-			width: auto;
-			height: auto;
-		}
-
-		.text-child {
-			max-width: 240px;
-			max-height: 240px;
-			width: auto;
-			height: auto;
-		}
-
-		.modal {
-			display: none;
-			position: fixed;
-			z-index: 1000;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
-			background: rgba(255, 255, 255, .8) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
-		}
-
-		.percent-modal {
-			text-align: center;
-			padding: 295px 100px;
-			color: blue;
-			font-size: large;
-		}
-
-		body.loading .modal {
-			overflow: hidden;
-		}
-
-		body.loading .modal {
-			display: block;
-		}
-
-		.error {
-			color: red;
-		}
-	</style>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/static/Admin/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/Admin/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/Admin/css/main.css">
+    <script src="/static/Admin/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <!--===============================================================================================-->
+    <style>
+        .sidebar-menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 99;
+            height: 100vh;
+            width: 280px;
+            overflow: hidden;
+            background: #303641;
+            box-shadow: 2px 0 32px rgba(0, 0, 0, 0.05);
+            -webkit-transition: all 0.3s ease 0s;
+            transition: all 0.3s ease 0s;
+        }
+        
+        .main-content {
+            background: lightgrey;
+            left: 280px;
+        }
+        
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .col-sm-4>video {
+            display: block;
+            max-width: 230px;
+            max-height: 230px;
+            width: auto;
+            height: auto;
+        }
+        
+        .text-child {
+            max-width: 240px;
+            max-height: 240px;
+            width: auto;
+            height: auto;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(255, 255, 255, .8) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
+        }
+        
+        .percent-modal {
+            text-align: center;
+            padding: 295px 100px;
+            color: blue;
+            font-size: large;
+        }
+        
+        body.loading .modal {
+            overflow: hidden;
+        }
+        
+        body.loading .modal {
+            display: block;
+        }
+        
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
 
-	<div class="container">
-		<!-- page title area start -->
-		<!-- Navigation -->
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-			<div class="container">
-				<a class="navbar-brand" href='/admin/managevideo'>FUN-VIDEO</a>
+    <div class="container">
+        <!-- page title area start -->
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href='/admin/managevideo'>FUN-VIDEO</a>
 
-				<!-- dropdown menu -->
-				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active">
-							<div class="dropdown">
-								<a class="nav-link dropbtn" href="#">
-									<img class="rounded" alt="EO" id="imageChannel" width="50" height="50">
-									<span class="dropdown-name" id="nameChannel">No name</span>
-									<span>
+                <!-- dropdown menu -->
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <div class="dropdown">
+                                <a class="nav-link dropbtn" href="#">
+                                    <img class="rounded" alt="EO" id="imageChannel" width="50" height="50">
+                                    <span class="dropdown-name" id="nameChannel">No name</span>
+                                    <span>
 										<button type="button" class="btn btn-success" onclick="logout()">LogOut</button>
 									</span>
-								</a>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<!-- page title area end -->
-		<div class="row main-content">
-			<!-- Cột phải -->
-			<div class="col-sm-12 bg-light">
-				<div class="row">
-					<form id='formSubmit' class="col-sm-12" enctype="multipart/form-data">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label for="title">Title:</label>
-									<textarea class="form-control" id="title" name="title" placeholder="title" row="50"
-										cols="50"></textarea>
-								</div>
-								<div class="form-group">
-									Image:
-									<input type="file" accept='image/*' class="form-group" id="image" name="image" />
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label for="description">Description:</label>
-									<textarea class="form-control" id="description" name="description" row="50"
-										cols="50" placeholder="description"></textarea>
-								</div>
-								<div class="form-group">
-									Video:
-									<input type="file" accept="video/mp4" class="form-group" id="video" name="video" />
-								</div>
-							</div>
-						</div>
-					</form>
-					<div class="row col-sm-12 justify-content-center">
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- page title area end -->
+        <div class="row main-content">
+            <!-- Cột phải -->
+            <div class="col-sm-12 bg-light">
+                <div class="row">
+                    <form id='formSubmit' class="col-sm-12" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="title">Title:</label>
+                                    <textarea class="form-control" id="title" name="title" placeholder="title" row="50" cols="50"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    Image:
+                                    <input type="file" accept='image/*' class="form-group" id="image" name="image" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea class="form-control" id="description" name="description" row="50" cols="50" placeholder="description"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    Video:
+                                    <input type="file" accept="video/mp4" class="form-group" id="video" name="video" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row col-sm-12 justify-content-center">
 
-						<div class="col-sm-6" style="text-align: right;">
-							<button class="btn btn-info" style="padding: 10px 24px;" id="btnReset" onclick="refresh()">
+                        <div class="col-sm-6" style="text-align: right;">
+                            <button class="btn btn-info" style="padding: 10px 24px;" id="btnReset" onclick="refresh()">
 								Reset
 							</button>
-						</div>
-						<div class="col-sm-6" style="text-align: left;">
-							<button class="btn btn-success" style="padding: 10px 24px;" id="btnPost"
-								onclick="createNewVideo()">
+                        </div>
+                        <div class="col-sm-6" style="text-align: left;">
+                            <button class="btn btn-success" style="padding: 10px 24px;" id="btnPost" onclick="createNewVideo()">
 								Post
 							</button>
-						</div>
-					</div>
+                        </div>
+                    </div>
 
-				</div>
-				<hr>
-				</hr>
-				<div class="col-sm-12">
-					<div class="row justify-content-start">
-						Total:
-						<div class="col-sm-3"><i class="fa fa-thumbs-up numberformat" aria-hidden="true"
-								id="totalLike">0</i></div>
-						<div class="col-sm-3"><i class="fa fa-eye numberformat" aria-hidden="true" id="totalView">0</i>
-						</div>
-					</div>
-					<div id="containerVideo" class="col-sm-12 flex-container">
-
-
-					</div>
-				</div>
-			</div>
-			<!-- Kết thúc cột phải -->
-		</div>
-		<div class="modal">
-			<!-- Place at bottom of page -->
-			<p id='percent' class="percent-modal"></p>
-		</div>
-	</div>
-	<!--===============================================================================================-->
-
-	<!--===============================================================================================-->
-	<script src="/static/Admin/vendor/bootstrap/js/popper.js"></script>
-	<script src="/static/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="/static/Admin/vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="/static/Admin/vendor/tilt/tilt.jquery.min.js"></script>
-	<script>
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-	<!--===============================================================================================-->
-	<script src="/static/Admin/js/main.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!--=========================This my area for script===============================================-->
-	<script>
-		$('.numberformat').mask("#,##0", { reverse: true });
-		function getParameterByName(name, url) {
-			if (!url) url = window.location.href;
-			name = name.replace(/[\[\]]/g, "\\$&");
-			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-				results = regex.exec(url);
-			if (!results) return null;
-			if (!results[2]) return '';
-			return decodeURIComponent(results[2].replace(/\+/g, " "));
-		}
-		var strHost = "https://video-vds.herokuapp.com";
-
-		$body = $("body");
-		$(document).on({
-			ajaxStart: function () { $body.addClass("loading"); },
-			ajaxStop: function () { $body.removeClass("loading"); }
-		});
-		function getCookie(cname) {
-			var name = cname + '=';
-			var decodedCookie = decodeURIComponent(document.cookie);
-			var ca = decodedCookie.split(';');
-			for (var i = 0; i < ca.length; i++) {
-				var c = ca[i];
-				while (c.charAt(0) == ' ') {
-					c = c.substring(1);
-				}
-				if (c.indexOf(name) == 0) {
-					return c.substring(name.length, c.length);
-				}
-			}
-			return '';
-		}
-		$(document).ready(function () {
-			if (getCookie('jwt') == '') {
-				location.href = strHost + '/admin/login';
-			}
-			getInfoChannel();
-			getAllVideoOfChannel();
-		});
-		function logout() {
-			document.cookie = 'jwt=; expires=Thu, 18 Dec 2018 8:00:00 UTC';
-			document.cookie = 'id=; expires=Thu, 18 Dec 2018 8:00:00 UTC';
-			location.href = '/admin/login';
-		}
-
-		function getInfoChannel() {
-			$.ajax
-				({
-					type: "GET",
-					url: strHost + "/channel/" + getCookie('id'),
-					dataType: 'json',
-					success: function (result) {
-						$("#imageChannel").attr("src", strHost + result.image);
-						$("#nameChannel").text(result.channelName);
-					}
-				});
-		}
-
-		function getAllVideoOfChannel() {
-			$.ajax
-				({
-					type: "GET",
-					url: strHost + "/video?channelId=" + getCookie('id'),
-					dataType: 'json',
-					success: function (result) {
-						$('#containerVideo').empty();
-						var like = 0, view = 0;
-						if (typeof result.allVideo[0] != 'undefined') {
-							$.each(result.allVideo, function (index, value) {
-								like += value.like.length;
-								view += value.view;
-								addVideo(value._id, value.videoPath[0], value.title, value.like.length, value.view);
-							});
-							$('#totalLike').text(like);
-							$('#totalView').text(view);
-						}
-					},
-					error: function (error) {
-						alert("Can not get video");
-					}
-				});
-		}
-
-		function addVideo(id, pathV, name, totalLike, totalView) {
-			var str = "<div class=\"col-sm-4 mt-5\"> " +
-				"   <video id=\"video" + id + "\" class=\"post-video\" controls></video> " +
-				"	<div class=\"row justify-content-start\"> " +
-				"			<div class=\"col-sm-5\"><button class=\"btn btn-info\" onclick=\" detailVideo('" + id + "')\">Detail</button></div> " +
-				"			<div class=\"col-sm-5\"><button class=\"btn btn-danger\" onclick=\" warningBeforeDelete('" + id + "')\">Delete</button></div> " +
-				"	</div> " +
-				"	<h5 class=\"text-child mt-3\" style=\"text-align: center;\">" + name + "</h5> " +
-				"	<div class=\"text-child\" style=\"text-align: center;\"><i class=\"fa fa-thumbs-up numberformat\" aria-hidden=\"true\">" + totalLike + "</i></div> " +
-				"	<div class=\"text-child \" style=\"text-align: center;\"><i class=\"fa fa-eye numberformat\" aria-hidden=\"true\">" + totalView + "</i></div> " +
-				"</div>";
-			$('#containerVideo').prepend(str);
-			var video = document.getElementById('video' + id);
-			var videoSrc = pathV;
-			if (Hls.isSupported()) {
-				var hls = new Hls();
-				hls.loadSource(videoSrc);
-				hls.attachMedia(video);
-			}
-			else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-				video.src = videoSrc;
-			}
-		}
-
-		function createNewVideo() {
-			var check = $('#formSubmit').valid();
-			if (check) {
-				var formData = new FormData($('#formSubmit')[0]);
-				$.ajax
-					({
-						type: "POST",
-						url: strHost + "/video",
-						enctype: $('#formSumit').attr('enctype'),
-						data: formData,
-						cache: false,
-						contentType: false,
-						processData: false,
-						headers: {
-							"Authorization": "Bearer " + getCookie('jwt')
-						},
-						success: function (result) {
-							getAllVideoOfChannel();
-							refresh();
-							Swal.fire({
-								icon: 'success',
-								title: 'Post Video Success'
-							});
-							
-						},
-					
-						error: function (xhr, status, error) {
-							// alert("Create new video fail - "+ xhr.responseText);
-							Swal.fire({
-								icon: 'error',
-								title: 'Post Video Fail',
-								text: xhr.responseText
-							});
-						}
-					});
-					var source = new EventSource("/video/upload/progress?channelId=" + getCookie('id'));
-								source.onmessage = function (event) {
-									$('#percent').text(Math.floor(event.data*100)+'%');
-									// console.log(event);
-								};
-								source.addEventListener("error", function (e) {
-									console.log(e.data);
-								})
+                </div>
+                <hr>
+                </hr>
+                <div class="col-sm-12">
+                    <div class="row justify-content-start">
+                        Total:
+                        <div class="col-sm-3"><i class="fa fa-thumbs-up numberformat" aria-hidden="true" id="totalLike">0</i></div>
+                        <div class="col-sm-3"><i class="fa fa-eye numberformat" aria-hidden="true" id="totalView">0</i>
+                        </div>
+                    </div>
+                    <div id="containerVideo" class="col-sm-12 flex-container">
 
 
-			}
-		}
-		function warningBeforeDelete(id) {
-			Swal.fire({
-				title: 'Do you want to delete the video?',
-				showDenyButton: true,
-				confirmButtonText: `Yes`,
-			}).then((result) => {
-				if (result.isConfirmed) {
-					deleteVideo(id)
-				}
-			})
-		}
+                    </div>
+                </div>
+            </div>
+            <!-- Kết thúc cột phải -->
+        </div>
+        <div class="modal">
+            <!-- Place at bottom of page -->
+            <p id='percent' class="percent-modal"></p>
+        </div>
+    </div>
+    <!--===============================================================================================-->
 
-		function deleteVideo(id) {
-			var data = {};
-			data['videoId'] = id;
-			$.ajax
-				({
-					type: "DELETE",
-					url: strHost + "/video",
-					data: JSON.stringify(data),
-					dataType: 'json',
-					contentType: 'application/json',
-					headers: {
-						"Authorization": "Bearer " + getCookie('jwt')
-					},
-					success: function (result) {
-						getAllVideoOfChannel();
-						Swal.fire({
-							icon: 'success',
-							title: 'Delete Video Success'
-						});
-					},
-					error: function (xhr, status, error) {
-						Swal.fire({
-							icon: 'error',
-							title: 'Delete Video Fail',
-							text: xhr.responseText
-						});
-					}
-				});
-		}
-		function detailVideo(id) {
-			location.href = strHost + '/admin/video/detail?&idVideo=' + id;
-		}
+    <!--===============================================================================================-->
+    <script src="/static/Admin/vendor/bootstrap/js/popper.js"></script>
+    <script src="/static/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/Admin/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/Admin/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="/static/Admin/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--=========================This my area for script===============================================-->
+    <script>
+        $('.numberformat').mask("#,##0", {
+            reverse: true
+        });
 
-		var validator = $("#formSubmit").validate({
-			rules: {
-				title: {
-					required: true,
-					minlength: 5
-				},
-				description: {
-					required: true,
-					minlength: 5
-				},
-				image: {
-					required: true,
-				},
-				video: {
-					required: true,
-				}
-			},
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        var strHost = "https://video-vds.herokuapp.com";
 
-			messages: {
-				title: {
-					required: "This field is required.",
-					minlength: "Minimum length is 5"
-				},
-				description: {
-					required: "This field is required.",
-					minlength: "Minimum value is 5"
-				},
-				image: {
-					required: "This field is required.",
-				},
-				video: {
-					required: "This field is required.",
-				}
-			},
-			highlight: function (element) {
-				$(element).parent().addClass('error')
-			},
-			unhighlight: function (element) {
-				$(element).parent().removeClass('error')
-			}
-		});
+        $body = $("body");
+        $(document).on({
+            ajaxStart: function() {
+                $body.addClass("loading");
+            },
+            ajaxStop: function() {
+                $body.removeClass("loading");
+            }
+        });
 
-		function refresh(){
-			$('#formSubmit')[0].reset();   
-		}
-	</script>
+        function getCookie(cname) {
+            var name = cname + '=';
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return '';
+        }
+        $(document).ready(function() {
+            if (getCookie('jwt') == '') {
+                location.href = strHost + '/admin/login';
+            }
+            getInfoChannel();
+            getAllVideoOfChannel();
+        });
+
+        function logout() {
+            document.cookie = 'jwt=; expires=Thu, 18 Dec 2018 8:00:00 UTC';
+            document.cookie = 'id=; expires=Thu, 18 Dec 2018 8:00:00 UTC';
+            location.href = '/admin/login';
+        }
+
+        function getInfoChannel() {
+            $.ajax({
+                type: "GET",
+                url: strHost + "/channel/" + getCookie('id'),
+                dataType: 'json',
+                success: function(result) {
+                    $("#imageChannel").attr("src", strHost + result.image);
+                    $("#nameChannel").text(result.channelName);
+                }
+            });
+        }
+
+        function getAllVideoOfChannel() {
+            $.ajax({
+                type: "GET",
+                url: strHost + "/video?channelId=" + getCookie('id'),
+                dataType: 'json',
+                success: function(result) {
+                    $('#containerVideo').empty();
+                    var like = 0,
+                        view = 0;
+                    if (typeof result.allVideo[0] != 'undefined') {
+                        $.each(result.allVideo, function(index, value) {
+                            like += value.like.length;
+                            view += value.view;
+                            addVideo(value._id, value.videoPath[0], value.title, value.like.length, value.view);
+                        });
+                        $('#totalLike').text(like);
+                        $('#totalView').text(view);
+                    }
+                },
+                error: function(error) {
+                    alert("Can not get video");
+                }
+            });
+        }
+
+        function addVideo(id, pathV, name, totalLike, totalView) {
+            var str = "<div class=\"col-sm-4 mt-5\"> " +
+                "   <video id=\"video" + id + "\" class=\"post-video\" controls></video> " +
+                "	<div class=\"row justify-content-start\"> " +
+                "			<div class=\"col-sm-5\"><button class=\"btn btn-info\" onclick=\" detailVideo('" + id + "')\">Detail</button></div> " +
+                "			<div class=\"col-sm-5\"><button class=\"btn btn-danger\" onclick=\" warningBeforeDelete('" + id + "')\">Delete</button></div> " +
+                "	</div> " +
+                "	<h5 class=\"text-child mt-3\" style=\"text-align: center;\">" + name + "</h5> " +
+                "	<div class=\"text-child\" style=\"text-align: center;\"><i class=\"fa fa-thumbs-up numberformat\" aria-hidden=\"true\">" + totalLike + "</i></div> " +
+                "	<div class=\"text-child \" style=\"text-align: center;\"><i class=\"fa fa-eye numberformat\" aria-hidden=\"true\">" + totalView + "</i></div> " +
+                "</div>";
+            $('#containerVideo').prepend(str);
+            var video = document.getElementById('video' + id);
+            var videoSrc = pathV;
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(videoSrc);
+                hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = videoSrc;
+            }
+        }
+
+        function createNewVideo() {
+            var check = $('#formSubmit').valid();
+            if (check) {
+                var formData = new FormData($('#formSubmit')[0]);
+                $.ajax({
+                    type: "POST",
+                    url: strHost + "/video",
+                    enctype: $('#formSumit').attr('enctype'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        "Authorization": "Bearer " + getCookie('jwt')
+                    },
+                    success: function(result) {
+                        getAllVideoOfChannel();
+                        refresh();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Post Video Success'
+                        });
+
+                    },
+
+                    error: function(xhr, status, error) {
+                        // alert("Create new video fail - "+ xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Post Video Fail',
+                            text: xhr.responseText
+                        });
+                    }
+                });
+                var source = new EventSource("/video/upload/progress?channelId=" + getCookie('id'));
+                source.onmessage = function(event) {
+                    $('#percent').text(Math.floor(event.data * 100) + '%');
+                    // console.log(event);
+                };
+                source.addEventListener("error", function(e) {
+                    console.log(e.data);
+                })
+
+
+            }
+        }
+
+        function warningBeforeDelete(id) {
+            Swal.fire({
+                title: 'Do you want to delete the video?',
+                showDenyButton: true,
+                confirmButtonText: `Yes`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteVideo(id)
+                }
+            })
+        }
+
+        function deleteVideo(id) {
+            var data = {};
+            data['videoId'] = id;
+            $.ajax({
+                type: "DELETE",
+                url: strHost + "/video",
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: 'application/json',
+                headers: {
+                    "Authorization": "Bearer " + getCookie('jwt')
+                },
+                success: function(result) {
+                    getAllVideoOfChannel();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Delete Video Success'
+                    });
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Delete Video Fail',
+                        text: xhr.responseText
+                    });
+                }
+            });
+        }
+
+        function detailVideo(id) {
+            location.href = strHost + '/admin/video/detail?&idVideo=' + id;
+        }
+
+        $.validator.addMethod("videosize", function(value, element) {
+            return this.optional(element) || (element.files[0].size <= 1024*1024*10)
+        });
+        $.validator.addMethod("imagesize", function(value, element) {
+            return this.optional(element) || (element.files[0].size <= 1024*1024)
+        });
+
+        var validator = $("#formSubmit").validate({
+            rules: {
+                title: {
+                    required: true,
+                    minlength: 5
+                },
+                description: {
+                    required: true,
+                    minlength: 5
+                },
+                image: {
+                    required: true,
+                    imagesize: true
+                },
+                video: {
+                    required: true,
+                    videosize: true
+                }
+            },
+
+            messages: {
+                title: {
+                    required: "This field is required.",
+                    minlength: "Minimum length is 5"
+                },
+                description: {
+                    required: "This field is required.",
+                    minlength: "Minimum value is 5"
+                },
+                image: {
+                    required: "This field is required.",
+                    imagesize: "File Image max is 1MB"
+                },
+                video: {
+                    required: "This field is required.",
+                    videosize: "File Video max is 10MB"
+                }
+            },
+            highlight: function(element) {
+                $(element).addClass('error')
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('error')
+            }
+        });
+
+        function refresh() {
+            $('#formSubmit')[0].reset();
+        }
+    </script>
 </body>
 
 </html>
