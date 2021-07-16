@@ -117,17 +117,20 @@ router.get('/upload/progress',function(req,res){
 });
 
 
-router.put('/',cpUpload,function(req,res){
-    const modifyAttributes={};
-    if(req.body.videoId===undefined) return res.status(400).status("Modify videoId is missing");
-    if (typeof req.body.title === 'string' && validator.isLength(req.body.title, { min: 5, max: 100 })) modifyAttributes.title=req.body.title;
-    if (typeof req.body.description === 'string' && validator.isLength(req.body.description, { min: 5, max: 100 })) modifyAttributes.description=req.body.description;
+router.put('/',function(req,res){
+    cpUpload(req, res, err => {
+        if(err)  return res.status(400).end(err.message); 
+        
+          const modifyAttributes={};
+        if(req.body.videoId===undefined) return res.status(400).status("Modify videoId is missing");
+        if (typeof req.body.title === 'string' && validator.isLength(req.body.title, { min: 5, max: 100 })) modifyAttributes.title=req.body.title;
+        if (typeof req.body.description === 'string' && validator.isLength(req.body.description, { min: 5, max: 100 })) modifyAttributes.description=req.body.description;
 
-    services.playback.modifyVideo(req.channel._id,req.body.videoId,modifyAttributes,req.files===undefined||req.files.image===undefined?null:req.files.image[0], function(err2, docs2) {
-        if (err2) return res.status(500).end(err2.message);
-        res.status(200).end(JSON.stringify(docs2));
-    })
-
+        services.playback.modifyVideo(req.channel._id,req.body.videoId,modifyAttributes,req.files===undefined||req.files.image===undefined?null:req.files.image[0], function(err2, docs2) {
+            if (err2) return res.status(500).end(err2.message);
+            res.status(200).end(JSON.stringify(docs2));
+        })
+    }
     
 })
 
