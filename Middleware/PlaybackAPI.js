@@ -58,50 +58,53 @@ var responseOnUploadProgress={};
 
 //Upload video
 var cpUpload = upload.fields([{ name: 'video', maxCount: 1 }, { name: 'image', maxCount: 1 }]);
-router.post('/', cpUpload, function (req, res,uploadErr){
-    if(uploadErr)  return res.status(400).end(uploadErr.message); 
-    const errors = [];
-    if (typeof req.body.title !== 'string' || !validator.isLength(req.body.title, { min: 5, max: 100 })) errors.push({ path: "title", message: "string from 5-100" });
-    if (typeof req.body.description !== 'string' || !validator.isLength(req.body.description, { min: 5, max: 100 })) errors.push({ path: "description", message: "string from 5-100" });
-    if (req.files === undefined || req.files.image === undefined) errors.push({ path: "image", message: "file must not empty" });
-    if (req.files === undefined || req.files.video === undefined) errors.push({ path: "video", message: "file must not empty" });
-    if (errors.length > 0) {
-        return res.status(400).json({ errors: errors });
-    }
+router.post('/',function (req, res){
+    cpUpload(req, res, err => {
+        if(err)  return res.status(400).end(uploadErr.message); 
 
-    
+        const errors = [];
+        if (typeof req.body.title !== 'string' || !validator.isLength(req.body.title, { min: 5, max: 100 })) errors.push({ path: "title", message: "string from 5-100" });
+        if (typeof req.body.description !== 'string' || !validator.isLength(req.body.description, { min: 5, max: 100 })) errors.push({ path: "description", message: "string from 5-100" });
+        if (req.files === undefined || req.files.image === undefined) errors.push({ path: "image", message: "file must not empty" });
+        if (req.files === undefined || req.files.video === undefined) errors.push({ path: "video", message: "file must not empty" });
+        if (errors.length > 0) {
+            return res.status(400).json({ errors: errors });
+        }
 
-    services.playback.uploadVideo(req.channel._id, req.body.title, req.body.description, req.files.image[0], req.files.video[0],
-        (progressInPercent) => {         
-        //    console.log(responseOnUploadProgress);
-            res.write(progressInPercent + '\n');
-            if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
-                // console.log('asd');
-                responseOnUploadProgress[req.channel._id+''].write("data: "+progressInPercent+"\n\n" );
-            }
-        },
-        (err, newDoc) => {
-            if (err) {
+        
+
+        services.playback.uploadVideo(req.channel._id, req.body.title, req.body.description, req.files.image[0], req.files.video[0],
+            (progressInPercent) => {         
+            //    console.log(responseOnUploadProgress);
+                res.write(progressInPercent + '\n');
                 if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
-                responseOnUploadProgress[req.channel._id+''].end();
-
-                delete responseOnUploadProgress[req.channel._id+''];
+                    // console.log('asd');
+                    responseOnUploadProgress[req.channel._id+''].write("data: "+progressInPercent+"\n\n" );
                 }
-                
-
-                return res.status(500).end(err.message);
-            }
-            else{
-                if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
+            },
+            (err, newDoc) => {
+                if (err) {
+                    if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
                     responseOnUploadProgress[req.channel._id+''].end();
-    
+
                     delete responseOnUploadProgress[req.channel._id+''];
                     }
-               
-               
-                return res.end();
-            }
-        })
+                    
+
+                    return res.status(500).end(err.message);
+                }
+                else{
+                    if(responseOnUploadProgress.hasOwnProperty(req.channel._id+'')){
+                        responseOnUploadProgress[req.channel._id+''].end();
+        
+                        delete responseOnUploadProgress[req.channel._id+''];
+                        }
+                
+                
+                    return res.end();
+                }
+            })
+    });
 });
 router.get('/upload/progress',function(req,res){
     const errors = [];
